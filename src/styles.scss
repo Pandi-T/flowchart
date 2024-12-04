@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.fc-nodeedit, .fc-nodedelete {
+  display: none !important;
+}
+.red .fc-node .innerNode, .red .fc-node .innerNode .fc-connector {
+  background-color: #39c !important;
+}

@@ -1,0 +1,28 @@
+<div class="logo-container">
+  <img src="assets/logo1.png" alt="App Logo" class="logo">
+  <div class="logo-heading">POC of Flowchart</div>
+</div>
+<div class="container">
+  <div class="file-upload">
+    <h4>Upload Flowchart Data</h4>
+    <input (change)="onFileSelected($event)" id="file_input" type="file">
+    <button class="btnCls" (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+    <p>{{ uploadResponse }}</p>
+  </div>
+  <div class="fc-container" *ngIf="modelData?.length">
+    <div class="fc-right-pane">
+      <ng-container *ngFor="let model of modelData; let index = index">
+        <div class="flowchart-wrapper" [class]="model?.nodes[index]?.class">
+          <fc-canvas #fcCanvas id="fc-target-canvas"  [model]="model" [selectedObjects]="flowchartselected"
+            [edgeStyle]="flowchartConstants.curvedStyle" [userCallbacks]="callbacks" [automaticResize]="true"
+            [dragAnimation]="flowchartConstants.dragAnimationRepaint">
+          </fc-canvas>
+          <input type="checkbox" (change)="fieldsChange($event, index)" [disabled]="selectedFlow != -1 && selectedFlow != index+1" class="fc-checkbox" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="text-end" *ngIf="modelData?.length">
+    <button type="submit" class="btnCls" [disabled]="selectedFlow==-1" (click)="onSubmit()">Download</button>
+  </div>
+</div>
